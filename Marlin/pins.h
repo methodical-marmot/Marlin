@@ -73,6 +73,8 @@
 #elif MB(RAMPS_14_SF)
   #define IS_RAMPS_SF
   #include "pins_RAMPS.h"
+#elif MB(RAMPS_VORON)
+  #include "pins_RAMPS_VORON.h"
 #elif MB(GEN6)
   #include "pins_GEN6.h"
 #elif MB(GEN6_DELUXE)

@@ -600,6 +600,16 @@ void kill_screen(const char* lcd_msg) {
 
   #endif // MENU_ITEM_CASE_LIGHT
 
+  // VORON Specific tweaks
+  void lcd_lowerbed() {
+    enqueue_and_echo_commands_P(PSTR("G91\nG1 Z20 F300\nG90"));
+  }
+
+  void lcd_rehome_z() {
+    enqueue_and_echo_commands_P(PSTR("G28 Z\nG1 Z0 F100"));
+  }
+
+
   /**
    *
    * "Main" menu
@@ -609,7 +619,7 @@ void kill_screen(const char* lcd_msg) {
   void lcd_main_menu() {
     START_MENU();
     MENU_BACK(MSG_WATCH);
-
+    MENU_ITEM(function, "Lower Bed", lcd_lowerbed);
     //
     // Switch case light on/off
     //
@@ -1896,6 +1906,7 @@ void kill_screen(const char* lcd_msg) {
     MENU_BACK(MSG_CONTROL);
     #if HAS_BED_PROBE
       MENU_ITEM_EDIT(float32, MSG_ZPROBE_ZOFFSET, &zprobe_zoffset, Z_PROBE_OFFSET_RANGE_MIN, Z_PROBE_OFFSET_RANGE_MAX);
+      MENU_ITEM(function, "Re-home Z", lcd_rehome_z);
     #endif
     // Manual bed leveling, Bed Z:
     #if ENABLED(MANUAL_BED_LEVELING)
