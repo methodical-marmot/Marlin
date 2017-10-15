@@ -29,7 +29,7 @@
 // Include the base configuration for RAMPs 1.4
 #include "pins_RAMPS.h"
 
-#define CONTROLLERFAN_PIN  8 // D8 on RAMPs. Used for the fan to cool controller 
+#define CONTROLLER_FAN_PIN  8 // D8 on RAMPs. Used for the fan to cool controller 
  							 // LED strip can be attached to the same output. This way LEDs are only on during printing, and shortly after
 
 // Fan Expansion board pins
