@@ -141,7 +141,7 @@
 #define EXTRUDERS 2
 
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
-//#define SINGLENOZZLE
+#define SINGLENOZZLE
 
 /**
  * Průša MK2 Single Nozzle Multi-Material Multiplexer, and variants.
@@ -535,11 +535,12 @@
 #define PULLEY_TEETH 20.0
 #define Z_ROD_PITCH 2
 
-#define DIRECTDRIVE_GEAR_PERIMETER 32
+#define DIRECT_DRIVE_GEAR_PERIMETER 32
 
 #define XY_STEPS (NEMA17_MOTOR_STEPS / (PULLEY_PITCH * PULLEY_TEETH))
 #define Z_STEPS (NEMA17_MOTOR_STEPS / Z_ROD_PITCH)
-#define DIRECT_DRIVE_EXTRUDER_STEPS (NEMA17_MOTOR_STEPS / DIRECTDRIVE_GEAR_PERIMETER)
+#define DIRECT_DRIVE_EXTRUDER_STEPS (NEMA17_MOTOR_STEPS / DIRECT_DRIVE_GEAR_PERIMETER)
+#define VORON_BELT_EXTRUDER_STEPS 608
 
 /**
  * With this option each E stepper can have its own factors for the
@@ -553,7 +554,8 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2[, E3[, E4]]]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { XY_STEPS, XY_STEPS, Z_STEPS, 608, DIRECT_DRIVE_EXTRUDER_STEPS }
+/* #define DEFAULT_AXIS_STEPS_PER_UNIT   { XY_STEPS, XY_STEPS, Z_STEPS, VORON_BELT_EXTRUDER_STEPS, DIRECT_DRIVE_EXTRUDER_STEPS }  */
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { XY_STEPS, XY_STEPS, Z_STEPS, VORON_BELT_EXTRUDER_STEPS, DIRECT_DRIVE_EXTRUDER_STEPS }
 
 
 /**
@@ -709,7 +711,7 @@
  *    (0,0)
  */
 #define X_PROBE_OFFSET_FROM_EXTRUDER 0  // X offset: -left  +right  [of the nozzle]
-#define Z_PROBE_OFFSET_FROM_EXTRUDER 0   // Z offset: -below +above  [the nozzle]
+#define Z_PROBE_OFFSET_FROM_EXTRUDER 0.25   // Z offset: -below +above  [the nozzle]
 
 #if ENABLED(VORON_NOZZLE_PROBE)
   #define Y_PROBE_OFFSET_FROM_EXTRUDER 0
@@ -787,7 +789,7 @@
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
 #define INVERT_E0_DIR false
-#define INVERT_E1_DIR false
+#define INVERT_E1_DIR true
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
 #define INVERT_E4_DIR false
@@ -805,7 +807,7 @@
 #define Y_HOME_DIR -1
 #define Z_HOME_DIR -1
 
-#define MIN_SOFTWARE_ENDSTOPS false // If true, axis won't move to coordinates less than HOME_POS.
+#define MIN_SOFTWARE_ENDSTOPS true // If true, axis won't move to coordinates less than HOME_POS.
 #define MAX_SOFTWARE_ENDSTOPS true  // If true, axis won't move to coordinates greater than the defined lengths below.
 
 // @section machine
@@ -926,7 +928,7 @@
   #endif
 
   // The Z probe minimum outer margin (to validate G29 parameters).
-  #define MIN_PROBE_EDGE 10
+  #define MIN_PROBE_EDGE 30
 
   // Probe along the Y axis, advancing X after each column
   //#define PROBE_Y_FIRST
@@ -986,7 +988,7 @@
   //=================================== Mesh ==================================
   //===========================================================================
 
-  #define MESH_INSET 10          // Mesh inset margin on print area
+  #define MESH_INSET 30          // Mesh inset margin on print area
   #define GRID_MAX_POINTS_X 3    // Don't use more than 7 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
@@ -1336,7 +1338,7 @@
 //
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
 //
-//#define INDIVIDUAL_AXIS_HOMING_MENU
+#define INDIVIDUAL_AXIS_HOMING_MENU
 
 //
 // SPEAKER/BUZZER
